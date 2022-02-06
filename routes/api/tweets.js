@@ -22,7 +22,7 @@ router.get('/user/:user_id', (req, res) => {
 router.post('/', 
     passport.authenticate('jwt', { session: false })),
     (req, res) => {
-        const {errors, isValid = validateTweetInput(req.body)}
+        const {errors, isValid } = validateTweetInput(req.body)
 
         if(!isValid) {
             return res.status(400).json(errors);
@@ -34,5 +34,5 @@ router.post('/',
 
         newTweet.save().then(tweet => res.json(tweet))
     }
-    
+
 module.exports = router;
